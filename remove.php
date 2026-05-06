@@ -1,0 +1,19 @@
+<?php 
+include("lock.php");
+if($_SERVER["REQUEST_METHOD"] == "POST")
+{
+$ord_id=$_POST['ord_id'];
+$st_id=$_POST['st_id'];
+$qty=$_POST['qty'];
+$stockd=$auth_user->getstock($st_id,$user_id);
+			$sell=$stockd['st_sell'];
+			$remqty=$sell+$qty;
+if($auth_user->updtstock($st_id,$remqty)){
+	if($auth_user->dltorder($ord_id)){
+	echo"success";
+	}
+}else{
+	echo"not";
+}
+}
+?>
