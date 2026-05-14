@@ -1,0 +1,22 @@
+<?php
+//error_reporting(0);
+include('lock.php');
+if(isset($_POST) and $_SERVER['REQUEST_METHOD'] == "POST")
+{
+	$cname	=$_POST['cname'];
+	$caddr	=$_POST['caddr'];
+	$ccont =$_POST['ccont'];
+	$cotp =md5($ccont);
+	$cemail =$_POST['cemail'];
+	$cflag	=1;
+	$ctime=time();
+				if($auth_user->addcust($cname,$caddr,$ccont,$cemail,$ctime,$cflag,$user_id,$cotp))
+				{	
+				echo "Success" ;
+				}
+				else
+				{
+					echo "Fails upload ";
+				}
+}
+?>
